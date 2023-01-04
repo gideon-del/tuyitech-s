@@ -43,7 +43,7 @@ const Product = () => {
               </span>
             </h1>
             <p className="max-w-md text-slate-800 font-bold ">
-              {`${product.hardDrive} | ${product.processor} | ${product.speed} | ${product.extra}`}
+              {`${product.description}`}
             </p>
           </div>
           <div className="flex gap-7 lg:w-[90%] w-[90%] max-w-md mx-auto md:mx-0 ">
