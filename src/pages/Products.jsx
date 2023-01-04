@@ -8,6 +8,7 @@ import Loader from "../components/Loader";
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     const fetchAllProducts = async () => {
       setIsLoading(true);

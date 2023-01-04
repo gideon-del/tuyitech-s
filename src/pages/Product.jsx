@@ -1,20 +1,44 @@
 import { doc, getDoc, getDocs } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import Loader from "../components/Loader";
 import { db } from "../firebase/firebaseConfig";
+import { addProduct } from "../store/cartSlice";
 const Product = () => {
   const { productId } = useParams();
 
   const [product, setProduct] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-
+  const [quantity, setQuantity] = useState(1);
+  const dispatch = useDispatch();
+  const addToCart = () => {
+    dispatch(
+      addProduct({
+        id: productId,
+        img: product.img,
+        name: product.name,
+        price: product.price,
+        amount: quantity,
+      })
+    );
+  };
+  const changeQuantity = (choice) => {
+    if (choice === "increase") {
+      setQuantity((prev) => prev + 1);
+    }
+    if (choice === "decrease") {
+      setQuantity((prev) => {
+        if (prev === 1) return prev;
+        return prev - 1;
+      });
+    }
+  };
   useEffect(() => {
     setIsLoading(true);
     const fetchProduct = async () => {
       const res = await getDoc(doc(db, "products", `${productId}`));
       const prod = { id: res.id, ...res.data() };
-      console.log(prod);
 
       setProduct({ id: res.id, ...res.data() });
       setIsLoading(false);
@@ -48,15 +72,24 @@ const Product = () => {
           </div>
           <div className="flex gap-7 lg:w-[90%] w-[90%] max-w-md mx-auto md:mx-0 ">
             <div className="flex flex-1  justify-between text-xl text-gray-700 border border-gray-700 items-center lg:gap-10  md:gap-6 bg-white w-fit p-4 shadow-lg rounded-lg ">
-              <button className="hover:text-black transition-all duration-300 font-normal">
+              <button
+                className="hover:text-black transition-all duration-300 font-normal"
+                onClick={() => changeQuantity("increase")}
+              >
                 +
               </button>
-              <span>1</span>
-              <button className="hover:text-black transition-all duration-300">
+              <span>{quantity}</span>
+              <button
+                className="hover:text-black transition-all duration-300"
+                onClick={() => changeQuantity("decrease")}
+              >
                 -
               </button>
             </div>
-            <button className="block lg:text-3xl md:text-xl bg-orange-600  shadow-orange-700 text-white py-2 px-4 flex-1 mx-auto  rounded-md shadow-md font-semibold italic text-lg">
+            <button
+              className="block lg:text-3xl md:text-xl bg-orange-600  shadow-orange-700 text-white py-2 px-4 flex-1 mx-auto  rounded-md shadow-md font-semibold italic text-lg"
+              onClick={addToCart}
+            >
               Add to cart
             </button>
           </div>
