@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    items:[],
-    totalAmount:0
+    items: JSON.parse(localStorage.getItem('items')) || [],
+    totalAmount: localStorage.getItem('totalAmount') || 0
 }
 
 const cartSlice = createSlice({
@@ -21,7 +21,8 @@ const cartSlice = createSlice({
             }
             // Adding the item if not available and increasin total
             state.totalAmount= state.items.reduce((cur,val) => cur + (val.amount * val.price),0)
-            console.log(state)
+            localStorage.setItem('items', JSON.stringify(state.items))
+            localStorage.setItem('totalAmount', state.totalAmount)
         },
         deleteSingleProduct(state,action) {
             const produnctIndex = state.items.find((item) => item.id === action.payload.id)
