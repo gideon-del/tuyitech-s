@@ -9,7 +9,7 @@ function App() {
     <Switch>
       <div className="min-h-screen font-Lato">
         <Header />
-        <Route path="/">
+        <Route path="/" exact>
           <Redirect to="/products" />
         </Route>
         <Route path="/products" exact>
