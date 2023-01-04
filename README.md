@@ -1,3 +1,0 @@
-# tuyitech-s
-
-Eccomerce Project
