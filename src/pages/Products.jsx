@@ -29,7 +29,7 @@ const Products = () => {
         <section className="products">
           {products.map((product) => (
             <Link key={product.id} to={`/products/${product.id}`}>
-              <div className="w-3/4 md:shadow-md md:w-full">
+              <div className="w-3/4 md:shadow-md md:w-full mx-auto">
                 <img src={product.img} className="w-full max-h-96" />
                 <div className="p-4 flex flex-col justify-between text-xl font-bold gap-4">
                   <h2> {product.name}</h2>

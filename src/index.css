@@ -8,7 +8,7 @@ picture {
 @tailwind variants;
 
 .products {
-  @apply grid items-start gap-4 md:px-11 my-5;
+  @apply grid items-center md:items-start gap-4 md:px-11 my-5;
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   justify-items: center;
 }
