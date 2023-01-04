@@ -4,6 +4,7 @@ import { collection, doc, getDocs, query } from "firebase/firestore";
 
 import { db } from "../firebase/firebaseConfig";
 import Loader from "../components/Loader";
+import { useSelector } from "react-redux";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -20,6 +21,7 @@ const Products = () => {
     };
     fetchAllProducts();
   }, []);
+
   let content;
   if (isLoading) {
     content = <Loader />;

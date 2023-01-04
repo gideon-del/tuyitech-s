@@ -1,7 +1,7 @@
 import { doc, getDoc, getDocs } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import React, { useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useParams } from "react-router-dom";
 import Loader from "../components/Loader";
 import { db } from "../firebase/firebaseConfig";
 import { addProduct } from "../store/cartSlice";
@@ -11,6 +11,14 @@ const Product = () => {
   const [product, setProduct] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [quantity, setQuantity] = useState(1);
+  const history = useHistory();
+  const items = useSelector((state) => state.cart.items);
+  const checkItemAmount = useCallback(() => {
+    const itemInCart = items.find((item) => item.id === productId);
+    if (itemInCart) {
+      setQuantity(itemInCart.amount);
+    }
+  }, []);
   const dispatch = useDispatch();
   const addToCart = () => {
     dispatch(
@@ -22,6 +30,7 @@ const Product = () => {
         amount: quantity,
       })
     );
+    history.push("/cart");
   };
   const changeQuantity = (choice) => {
     if (choice === "increase") {
@@ -44,7 +53,9 @@ const Product = () => {
       setIsLoading(false);
     };
     fetchProduct();
-  }, [productId]);
+    checkItemAmount();
+  }, [productId, checkItemAmount]);
+
   let content;
   if (isLoading) {
     content = <Loader />;
