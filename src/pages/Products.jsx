@@ -1,38 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { collection, doc, getDocs, query } from "firebase/firestore";
-import hp from "../assets/laptops/hp.jpg";
-import hpElite from "../assets/laptops/hpElite.jpg";
-import lenovo from "../assets/laptops/lenovo.jpg";
-import macbook from "../assets/laptops/macbook.jpg";
+
 import { db } from "../firebase/firebaseConfig";
 import Loader from "../components/Loader";
-const DUMMY_PRODUCTS = [
-  {
-    id: "p1",
-    img: hp,
-    name: "HP",
-    price: 50000,
-  },
-  {
-    id: "p2",
-    img: hpElite,
-    name: "HP Elite",
-    price: 20000,
-  },
-  {
-    id: "p3",
-    img: lenovo,
-    name: "Lenovo",
-    price: 30000,
-  },
-  {
-    id: "p4",
-    img: macbook,
-    name: "Macbook",
-    price: 70000,
-  },
-];
+
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);

@@ -1,7 +1,6 @@
 import { doc, getDoc, getDocs } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import hp from "../assets/laptops/hp.jpg";
 import Loader from "../components/Loader";
 import { db } from "../firebase/firebaseConfig";
 const Product = () => {
