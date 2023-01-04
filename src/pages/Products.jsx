@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { collection, doc, getDocs, query } from "firebase/firestore";
-
+import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig";
 import Loader from "../components/Loader";
-import { useSelector } from "react-redux";
 
 const Products = () => {
   const [products, setProducts] = useState([]);

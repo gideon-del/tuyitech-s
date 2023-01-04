@@ -1,7 +1,13 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { deleteSingleProduct } from "../store/cartSlice";
 
 const CartItems = ({ name, price, amount, id, img }) => {
+  const dispatch = useDispatch();
+  const deleteProduct = () => {
+    dispatch(deleteSingleProduct({ id }));
+  };
   return (
     <div className="flex items-center justify-between px-6 py-3 border-y md:gap-5 lg:gap-8 gap-4 flex-wrap">
       <img src={img} className="w-32" />
@@ -17,7 +23,10 @@ const CartItems = ({ name, price, amount, id, img }) => {
         >
           Edit
         </Link>
-        <button className="p-4 rounded-lg bg-red-600 text-md text-neutral-900 font-bold">
+        <button
+          className="p-4 rounded-lg bg-red-600 text-md text-neutral-900 font-bold"
+          onClick={deleteProduct}
+        >
           Delete
         </button>
       </div>

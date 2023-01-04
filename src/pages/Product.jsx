@@ -2,12 +2,15 @@ import { doc, getDoc, getDocs } from "firebase/firestore";
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
+import AddToCart from "../components/AddToCart";
 import Loader from "../components/Loader";
+import UpdateCart from "../components/UpdateCart";
 import { db } from "../firebase/firebaseConfig";
 import { addProduct } from "../store/cartSlice";
 const Product = () => {
   const { productId } = useParams();
-
+  //This state  is to check if item is in cart
+  const [itemInCart, setItemInCart] = useState(false);
   const [product, setProduct] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [quantity, setQuantity] = useState(1);
@@ -17,6 +20,7 @@ const Product = () => {
     const itemInCart = items.find((item) => item.id === productId);
     if (itemInCart) {
       setQuantity(itemInCart.amount);
+      setItemInCart(true);
     }
   }, []);
   const dispatch = useDispatch();
@@ -49,7 +53,7 @@ const Product = () => {
       const res = await getDoc(doc(db, "products", `${productId}`));
       const prod = { id: res.id, ...res.data() };
 
-      setProduct({ id: res.id, ...res.data() });
+      setProduct(prod);
       setIsLoading(false);
     };
     fetchProduct();
@@ -97,12 +101,11 @@ const Product = () => {
                 -
               </button>
             </div>
-            <button
-              className="block lg:text-3xl md:text-xl bg-orange-600  shadow-orange-700 text-white py-2 px-4 flex-1 mx-auto  rounded-md shadow-md font-semibold italic text-lg"
-              onClick={addToCart}
-            >
-              Add to cart
-            </button>
+            {itemInCart ? (
+              <UpdateCart addToCart={addToCart} />
+            ) : (
+              <AddToCart addToCart={addToCart} />
+            )}
           </div>
         </div>
       </main>

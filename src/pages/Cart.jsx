@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import CartItems from "../components/CartItems";
@@ -28,7 +28,7 @@ const Cart = () => {
               ))
             ) : (
               <Link to="/products">
-                <p className="bg-blue-700 p-5 rounded-lg w-fit mx-auto">
+                <p className="bg-blue-700 p-5 rounded-lg w-fit mx-auto font-bold italic text-white">
                   Add Product
                 </p>
               </Link>
