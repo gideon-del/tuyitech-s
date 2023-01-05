@@ -3,6 +3,7 @@ import Products from "./pages/Products";
 import Product from "./pages/Product";
 import Cart from "./pages/Cart";
 import Header from "./components/Header";
+import CheckOut from "./pages/CheckOut";
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
         </Route>
         <Route path="/cart">
           <Cart />
+        </Route>
+        <Route path="/order">
+          <CheckOut />
         </Route>
       </div>
     </Switch>

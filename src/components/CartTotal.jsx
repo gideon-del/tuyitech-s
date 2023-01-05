@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { deleteAllItem } from "../store/cartSlice";
 
 const CartTotal = ({ totalAmount }) => {
@@ -16,9 +17,9 @@ const CartTotal = ({ totalAmount }) => {
         </span>
       </h1>
       <div className="flex mx-auto w-fit gap-4">
-        <button className="p-5 bg-blue-800 rounded-md text-white">
+        <Link className="p-5 bg-blue-800 rounded-md text-white" to="/order">
           Place Order🤑
-        </button>
+        </Link>
         <button
           className="p-5 bg-red-600 rounded-md text-white"
           onClick={clearCart}
