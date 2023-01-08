@@ -1,18 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-
+import { addDoc, collection } from "firebase/firestore";
+import { db } from "../firebase/firebaseConfig";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { deleteAllItem } from "../store/cartSlice";
+import { useFlutterwave } from "flutterwave-react-v3";
+import configFunction from "../lib/flutterConfig";
+import Order from "../components/Order";
 const CheckOut = () => {
-  const { register, handleSubmit, error, reset } = useForm();
-  const allFields = ["name", "email", "phoneNumber", "address"];
-  const submit = (data) => {
+  const { register, handleSubmit, error, reset, getValues } = useForm();
+  const [data, setData] = useState(null);
+  const cart = useSelector((state) => state.cart);
+
+  const dispatch = useDispatch();
+
+  const history = useHistory();
+  console.log(cart);
+  if (cart.items.length === 0) {
+    history.replace("/products");
+  }
+  const submit = async (data) => {
+    const res = await addDoc(collection(db, "orders"), {
+      ...data,
+      products: cart.items,
+      total: cart.totalAmount,
+    });
+    setData(data);
+
     reset();
   };
+
   return (
     <main>
       <section>
         <h1 className="text-2xl italic font-bold text-center">Place Order</h1>
         <form
-          className="flex flex-col items-center justify-center"
+          className={` flex-col items-center justify-center ${
+            data ? "hidden" : "flex"
+          }`}
           onSubmit={handleSubmit(submit)}
         >
           <div className=" flex flex-col ">
@@ -71,6 +97,14 @@ const CheckOut = () => {
             Place order
           </button>
         </form>
+        {data && (
+          <Order
+            email={data.email}
+            name={data.name}
+            amount={cart.totalAmount}
+            phone_number={data.phoneNumber}
+          />
+        )}
       </section>
     </main>
   );

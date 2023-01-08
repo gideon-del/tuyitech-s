@@ -4,7 +4,10 @@ const initialState = {
     items: JSON.parse(localStorage.getItem('items')) || [],
     totalAmount: localStorage.getItem('totalAmount') || 0
 }
-
+const setLocalStorage = (items,totalAmount) => {
+    localStorage.setItem('items', JSON.stringify(items))
+            localStorage.setItem('totalAmount', totalAmount)
+}
 const cartSlice = createSlice({
     name:'cart',
     initialState,
@@ -21,17 +24,18 @@ const cartSlice = createSlice({
             }
             // Adding the item if not available and increasin total
             state.totalAmount= state.items.reduce((cur,val) => cur + (val.amount * val.price),0)
-            localStorage.setItem('items', JSON.stringify(state.items))
-            localStorage.setItem('totalAmount', state.totalAmount)
+            setLocalStorage(state.items,state.totalAmount)
         },
         deleteSingleProduct(state,action) {
-            const produnctIndex = state.items.find((item) => item.id === action.payload.id)
+            const produnctIndex = state.items.findIndex((item) => item.id === action.payload.id)
             state.items.splice(produnctIndex,1)
             state.totalAmount= state.items.reduce((cur,val) => cur + (val.amount * val.price),0)
+            setLocalStorage(state.items,state.totalAmount)
         },
         deleteAllItem(state) {
           state.items =[];
           state.totalAmount= 0;
+          setLocalStorage(state.items,state.totalAmount)
         }
 
     }

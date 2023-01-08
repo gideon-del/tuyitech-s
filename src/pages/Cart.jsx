@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 import CartItems from "../components/CartItems";
 import CartTotal from "../components/CartTotal";
 
+
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
-
+  
   return (
     <main className="my-4">
       <section>
