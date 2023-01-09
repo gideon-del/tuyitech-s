@@ -1,3 +1,4 @@
+
 const configFunction = (email,phone,customerName, amount) =>{
     const config = {
         public_key: import.meta.env.VITE_FLUTTER,
@@ -11,9 +12,9 @@ const configFunction = (email,phone,customerName, amount) =>{
           name: customerName,
         },
         customizations: {
-          title: "my Payment Title",
-          description: "Payment for items in cart",
-          logo: "https://st2.depositphotos.com/4403291/7418/v/450/depositphotos_74189661-stock-illustration-online-shop-log.jpg",
+          title: "Checkout",
+          description: "complete purchase",
+          logo: 'https://firebasestorage.googleapis.com/v0/b/tuyitech-3f023.appspot.com/o/tuyitech.jpg?alt=media&token=cb10b9ab-c3a0-4cab-b4fb-c4b13861ae28',
         },
       };
       return config
