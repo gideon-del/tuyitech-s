@@ -12,7 +12,7 @@ const CartTotal = ({ totalAmount }) => {
     <div className="font-semibold">
       <h1 className="text-center  text-3xl mb-4">
         Total:{" "}
-        <span className="text-green-900 font-bold">
+        <span className="text-red-500 font-bold">
           ₦{Intl.NumberFormat("en-US").format(totalAmount)}
         </span>
       </h1>

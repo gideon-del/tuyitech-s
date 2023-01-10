@@ -5,6 +5,9 @@ module.exports = {
     extend: {
       fontFamily:{
         Lato:['Lato', 'sans-serif']
+      },
+      colors:{
+        main:'#111111'
       }
     },
   },

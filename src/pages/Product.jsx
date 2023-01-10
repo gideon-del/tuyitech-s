@@ -70,32 +70,32 @@ const Product = () => {
         <img
           src={product.img}
           alt="hp"
-          className="flex-1  w-[90%] md:w-auto  md:max-h-[80vh]"
+          className="flex-1  w-[90%] md:w-auto  md:max-h-[80vh] rounded-md"
         />
         <div className="flex-1 md:self-auto self-stretch flex flex-col gap-3 md:gap-8 md:half">
           <div className="pl-5 flex flex-col gap-6">
-            <h1 className="text-3xl uppercase flex flex-col font-black text-zinc-800 gap-3">
+            <h1 className="text-3xl uppercase flex flex-col font-black text-neutral-500 gap-3">
               {product.name}
 
               <span className="text-orange-700 text-3xl font-bold">
                 ₦{Intl.NumberFormat("en-US").format(product.price)}
               </span>
             </h1>
-            <p className="max-w-md text-slate-800 font-bold ">
+            <p className="max-w-md text-neutral-400 font-bold ">
               {`${product.description}`}
             </p>
           </div>
-          <div className="flex gap-7 lg:w-[90%] w-[90%] max-w-md mx-auto md:mx-0 ">
-            <div className="flex flex-1  justify-between text-xl text-gray-700 border border-gray-700 items-center lg:gap-10  md:gap-6 bg-white w-fit p-4 shadow-lg rounded-lg ">
+          <div className=" lg:w-[90%] w-[90%] max-w-md mx-auto md:mx-0 items-center ">
+            <div className="flex flex-1  justify-between text-xl text-white  border border-gray-700 items-center lg:gap-10  md:gap-6 bg-main w-fit px-2 shadow-lg rounded-lg py-4">
               <button
-                className="hover:text-black transition-all duration-300 font-normal"
+                className="hover:text-black transition-all duration-300 font-black text-3xl w-10 h-10 bg-red-600 text-white rounded-full"
                 onClick={() => changeQuantity("increase")}
               >
                 +
               </button>
               <span>{quantity}</span>
               <button
-                className="hover:text-black transition-all duration-300"
+                className="hover:text-black transition-all duration-300 font-black text-3xl w-10 h-10 bg-red-600 text-white rounded-full"
                 onClick={() => changeQuantity("decrease")}
               >
                 -

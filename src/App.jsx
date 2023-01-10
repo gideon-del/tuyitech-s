@@ -8,7 +8,7 @@ import CheckOut from "./pages/CheckOut";
 function App() {
   return (
     <Switch>
-      <div className="min-h-screen font-Lato">
+      <div className="min-h-screen font-Lato bg-black text-neutral-400">
         <Header />
         <Route path="/" exact>
           <Redirect to="/products" />

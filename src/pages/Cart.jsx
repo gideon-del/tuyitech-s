@@ -4,14 +4,13 @@ import { Link } from "react-router-dom";
 import CartItems from "../components/CartItems";
 import CartTotal from "../components/CartTotal";
 
-
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
-  
+
   return (
     <main className="my-4">
       <section>
-        <h1 className="font-semibold italic text-2xl md:text-3xl text-center mb-4">
+        <h1 className="font-semibold italic text-2xl md:text-3xl text-center mb-4 text-neutral-300">
           Shopping Cart
         </h1>
         <div className="mb-2">
